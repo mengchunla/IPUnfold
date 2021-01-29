@@ -1,0 +1,48 @@
+# -*- coding: UTF-8 -*-
+#__author__ = 'kaka'
+import re,os,sys,time
+#######################
+ #输入内容为xx.xx.xx.xx-xx.xx.xx.xx 
+ #整体思路
+ #1.读取IP文件的内容
+ #1.1 判断文件内容ip是xx.xx.xx.xx.-xx 还是xx.xx.xx.xx-xx.xx.xx.xx还是xx.xx.xx.xx
+ #1.1.1 判断文件内容是否存在’-‘ 如果存在 继续进行 不存在 输出ip
+ #2.将IP分开，首先以“-” 分成完成ip 和尾号
+ #3.将完成IP的尾号和整体尾号进行处理 
+ #4.打印区间IP
+ #5.保存到文件中
+ 
+#读取文件
+fo = open("IP.txt","r")
+file_hadle=open('1.txt','a+')
+
+for line in fo.readlines():
+	line = line.strip("")
+	
+	#判断是否有- 如果没 直接写入
+	if "-" in line:
+	#按照- 将ip分开
+		ip2_srt = line.split('-')
+	#将完整IP分开
+		ipx = ip2_srt[0].split('.')
+		ipy = ip2_srt[1].split('.')
+		print ipy[-1]
+		for i in range(int(ipx[3]),int(ipy[-1])+1,1):
+			c = str(ipx[0])+ "." + str(ipx[1])+ "." + str(ipx[2])+"."+str(i)
+			file_hadle.write(c+",")	
+		file_hadle.write("\n")	
+	else:
+		file_hadle.write(line)
+file_hadle.close()
+		
+	
+#写入文件
+	
+fo.close()
+
+
+
+
+
+ 
+
